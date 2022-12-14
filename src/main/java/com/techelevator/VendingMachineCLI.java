@@ -21,13 +21,13 @@ public class VendingMachineCLI {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-<<<<<<< HEAD
+
 				DisplayInventory display = new DisplayInventory();
 				display.displayInventory();
-=======
+
 				// display vending machine items
 				System.out.println("nonononononono");
->>>>>>> 2ce393a9ccb60d9fbc26d666f6c4528cac4f07bf
+
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)){

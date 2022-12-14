@@ -23,7 +23,7 @@ public class UpdateInventory {
             while (inventoryList.hasNext()){
 
                 String line = inventoryList.nextLine();
-                wordBy = line.split("\\|");
+                wordBy = line.split("\\|"); //like csv
 
                forSale.add(new Inventory(wordBy[0],wordBy[1],
                        Double.parseDouble(wordBy[2]),wordBy[3]));
@@ -34,7 +34,7 @@ public class UpdateInventory {
 
             throw new RuntimeException("This file does not exist");
         } finally {
-            inventoryList.close();
+            inventoryList.close(); //closes Scanner
         }
 
     }
