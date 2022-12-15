@@ -3,7 +3,7 @@ package com.techelevator.products;
 public class Inventory {
 
 
-    protected String vendPosition;
+    protected String vendPosition;  //protected, encapsulated code to restrict access to the meet the exact level of access needed
     protected String productName;
 
     protected double price;
