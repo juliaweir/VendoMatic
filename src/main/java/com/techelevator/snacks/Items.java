@@ -1,10 +1,19 @@
-package com.techelevator;
+package com.techelevator.snacks;
 
-public class Items {
+/*
+12/15/2022
+added string flavourText
+ */
+
+
+
+public abstract class Items {
     //Variables
-    private String currentPosition, name;
+    private String currentPosition, name, flavourText;
     private int startingQuantity;
     private double itemValue;
+
+
 
 
 
@@ -16,6 +25,10 @@ public class Items {
         this.startingQuantity = startingQuantity;
         this.itemValue = itemValue;
     }
+
+
+    //methods
+
 
 
     //Getters
@@ -35,6 +48,9 @@ public class Items {
         return itemValue;
     }
 
+    public String getFlavourText() {
+        return flavourText;
+    }
 
     //Setters
     public void setCurrentPosition(String currentPosition) {
@@ -51,5 +67,9 @@ public class Items {
 
     public void setItemValue(double itemValue) {
         this.itemValue = itemValue;
+    }
+
+    public void setFlavourText(String flavourText) {
+        this.flavourText = flavourText;
     }
 }
