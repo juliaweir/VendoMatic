@@ -1,33 +1,20 @@
 package com.techelevator.snacks;
 
-/*
-12/15/2022
-added string flavourText
- */
-
-
+import java.math.BigDecimal;
 
 public abstract class Items {
     //Variables
     private String currentPosition, name, flavourText;
     private int startingQuantity;
-    private double itemValue;
-
-
-
-
-
+    private BigDecimal itemValue;
 
     //Constructors
-    public Items(String currentPosition, String name, int startingQuantity, double itemValue){
+    public Items(String currentPosition, String name, int startingQuantity, BigDecimal itemValue){
         this.currentPosition = currentPosition;
         this. name = name;
         this.startingQuantity = startingQuantity;
         this.itemValue = itemValue;
     }
-
-
-    //methods
 
 
 
@@ -44,7 +31,7 @@ public abstract class Items {
         return startingQuantity;
     }
 
-    public double getItemValue() {
+    public BigDecimal getItemValue() {
         return itemValue;
     }
 
@@ -65,7 +52,7 @@ public abstract class Items {
         this.startingQuantity = startingQuantity;
     }
 
-    public void setItemValue(double itemValue) {
+    public void setItemValue(BigDecimal itemValue) {
         this.itemValue = itemValue;
     }
 
