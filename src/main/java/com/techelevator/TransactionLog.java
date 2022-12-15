@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+//does the salesreport go under data?
 public class TransactionLog {
     public static String log() {
         File file = new File("salesreport.txt");
@@ -15,7 +15,7 @@ public class TransactionLog {
         try {
             fw = new FileWriter(file, true); //constructor File object and a boolean, true would allow appending text into the File if it exists.
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(LocalDate.now().format(DateTimeFormatter.ISO_DATE) + "user selection" + "new balance");
+            bw.write(LocalDate.now().format(DateTimeFormatter.ISO_DATE) + "user selection" + "new balance"); //have to look into what these var names are
             //will parse user selection value/new balance  into strings
             bw.write("\n");
             bw.close();
