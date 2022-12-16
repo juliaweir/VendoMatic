@@ -1,4 +1,4 @@
-package com.techelevator.sales;
+package com.techelevator.currency;
 
 public class SalesReport {
 
