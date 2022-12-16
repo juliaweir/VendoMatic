@@ -87,7 +87,8 @@ public class VendingMachineGUI {
         buyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-
+//would log here if something was bought?
+                //would need to instantiate an object
             }
         });
 

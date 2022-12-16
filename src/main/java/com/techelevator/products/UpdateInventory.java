@@ -16,8 +16,8 @@ public class UpdateInventory {
 
     public  List<Inventory> updateInventory(){
         try{
-            inventoryList = new Scanner(inventoryFile);
-            inventoryList.useDelimiter("|");
+            inventoryList = new Scanner(inventoryFile); //creates a new scanner which scans for the csv file
+            inventoryList.useDelimiter("|");  //scanner's delimiting pattern to a pattern constructed from the specified String.
 
             String[] wordBy;
             while (inventoryList.hasNext()){

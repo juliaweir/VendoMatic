@@ -8,12 +8,13 @@ with everyone's bank accounts, allowing customers to purchase products from thei
 
 1. The vending machine dispenses beverages, candy, chips, and gum.
    - Each vending machine item has a Name and a Price.
-2. A main menu must display when the software runs, presenting the following options:
+2. A main menu must display when the software runs, presenting the following options: 
     > ```
     > (1) Display Vending Machine Items
     > (2) Purchase
     > (3) Exit
-    > ```
+    > ``` 
++
 3. The vending machine reads its inventory from an input file when the vending machine
 starts.
 4. The vending machine is automatically restocked each time the application runs.
