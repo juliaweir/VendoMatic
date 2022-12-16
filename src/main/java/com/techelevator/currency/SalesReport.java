@@ -1,23 +1,71 @@
 package com.techelevator.currency;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
 public class SalesReport {
 
-    /*
-    variables use two maps that uses name of item and quantity, and name of item and price
+    // map and other variables
+    Map<String, Integer>  inventorySales = new HashMap<>();
+    private BigDecimal totalCost;
 
 
-    method 1 creates map using the inventory list to get name and sets values to 0 for first map (name , sold)
-    then makes new map contain name of item type in inventory and its price.
+    //method that reads vendingmechine.cvs and populates the inventory sales map and total cost
+    public void populateSales(){
+        // reference to cvs file
+        File vendingInventory = new File("C:\\Users\\xbox2\\OneDrive\\Desktop\\Capstone1\\module-1-capstone\\vendingmachine.csv");
+
+        //try catch blocks
+        try(Scanner populateMap = new Scanner (vendingInventory)) {
+
+            //loop through file
+            while (populateMap.hasNextLine()) {
+
+                //split each line into string array excluding |
+                String[] findName = populateMap.nextLine().split(Pattern.quote("|"));
+
+                //because everything is separated by | in cvs
+                // only need to add the second element  that is position 1 in array
+                inventorySales.put(findName[1], 0);
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("File not found at" + vendingInventory.getAbsolutePath());
+        }
+
+    }
 
 
-    method 2 everytime a sale is made this method must take the name of the item search for it in the map
-    and update its value by 1
+
+    //method that updates map and total cost when sale is made.
+    //does not need to take input, needs to read from log file
+    // and check if the lines contains the same name from the map and if it does update the map
+    // should also update populateMap so it has
+    public void updateSalesReport(){
+        //nested for loop
+        //main for loop goes through map based on key
+        //nested for loop goes through log file and compares key using a temp string
+        //in nested forloop if the temp string is included in the line from the sales report
+        //update the map for that item matching the key
+        // update the total cost
+        //after nested loop is done
+        // print blank line
+        //then print total cost
 
 
-    method 3 adds all the item's prices together using the vale from first map (name, sold) to create total sale amount
 
-    method 4
-    iterates through the map and writes to a file each item name + amount sold on new lines
-    then adds a single blank line to separates the last line that has the combined total
-    */
+
+        //update total cost example
+        //totalCost = totalCost.add(cost);
+
+        //use to update list example
+        //inventorySales.put(name, inventorySales.get(name) + 1);
+    }
+
 }
