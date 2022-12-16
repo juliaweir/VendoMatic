@@ -3,14 +3,15 @@ package com.techelevator.currency;
 import com.techelevator.products.Inventory;
 import java.util.Map;
 import java.util.HashMap;
+import java.math.BigDecimal;
 
 public class UserBalance extends Money implements Depositable {
 
-    public UserBalance(double balance) {
+    public UserBalance(BigDecimal balance) {
         super(balance);
     }
 
-    public void deposit(double deposit){
+    public void deposit(BigDecimal deposit){
         this.addBalance(deposit);
     }
 
@@ -18,10 +19,9 @@ public class UserBalance extends Money implements Depositable {
         this.subtractBalance(item.getPrice());
     }
 
-    public Map<String, Integer> returnChange(double balance){
-        //separate the balance into the integer portion and decimal portion
-        int intPart = (int)this.getBalance();
-        double doublePart = balance - intPart;
+    public Map<String, Integer> returnChange(BigDecimal balance){
+        //extract the decimal portion of the balance
+        BigDecimal cents = balance.remainder(BigDecimal.ONE);
 
         //declare coins
         int quarters = 0;
@@ -30,20 +30,20 @@ public class UserBalance extends Money implements Depositable {
         int pennies = 0;
 
         //loop through the decimal portion to get the change
-        while (doublePart >= .25){
-            doublePart -= .25;
+        while (cents.compareTo(BigDecimal.valueOf(.25)) > 0){
+            cents = cents.subtract(BigDecimal.valueOf(.25));
             quarters++;
         }
-        while (doublePart >= .10){
-            doublePart -= .10;
+        while (cents.compareTo(BigDecimal.valueOf(.1)) > 0){
+            cents = cents.subtract(BigDecimal.valueOf(.1));
             dimes++;
         }
-        while (doublePart >= .5){
-            doublePart -= .5;
+        while (cents.compareTo(BigDecimal.valueOf(.5)) > 0){
+            cents = cents.subtract(BigDecimal.valueOf(.5));
             nickels++;
         }
-        while (doublePart >= .1){
-            doublePart -= .1;
+        while (cents.compareTo(BigDecimal.valueOf(.1)) > 0){
+            cents = cents.subtract(BigDecimal.valueOf(.1));
             pennies++;
         }
         //fill a map with change to return

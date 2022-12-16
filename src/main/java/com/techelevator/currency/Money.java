@@ -1,9 +1,11 @@
 package com.techelevator.currency;
 
-public abstract class Money {
-    private double balance;
+import java.math.BigDecimal;
 
-    public Money(double balance) {
+public abstract class Money {
+    private BigDecimal balance;
+
+    public Money(BigDecimal balance) {
         this.balance = balance;
     }
 
@@ -12,15 +14,15 @@ public abstract class Money {
         System.out.printf("$" + "'.2f'", balance);
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void addBalance(double deposit){
-        this.balance += deposit;
+    public void addBalance(BigDecimal deposit){
+        this.balance = this.balance.add(deposit);
     }
 
-    public void subtractBalance(double withdrawl){
-        this.balance -= withdrawl;
+    public void subtractBalance(BigDecimal withdrawl){
+        this.balance = this.balance.subtract(withdrawl);
     }
 }
