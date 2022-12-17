@@ -1,12 +1,8 @@
 package com.techelevator.products;
 
-
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.math.BigDecimal;
+import java.util.*;
 
 public class UpdateInventory {
 
@@ -14,36 +10,49 @@ public class UpdateInventory {
     private File inventoryFile = new File("C:\\Users\\Mirag\\Desktop\\GitProjects\\Capstone\\module-1-capstone\\vendingmachine.csv");
     private List<Inventory> forSale = new ArrayList<>();
 
-    public  List<Inventory> updateInventory(){
-        try{
-            inventoryList = new Scanner(inventoryFile);
-            inventoryList.useDelimiter("|");
+   private Map<String,Inventory> findItem = new HashMap<>();
 
-            String[] wordBy;
-            while (inventoryList.hasNext()){
-
-                String line = inventoryList.nextLine();
-                wordBy = line.split("\\|");
-
-               forSale.add(new Inventory(wordBy[0],wordBy[1],
-                       Double.parseDouble(wordBy[2]),wordBy[3]));
-            }
-            return forSale;
-
-        }   catch (Exception e){
-
-            throw new RuntimeException("This file does not exist");
-        } finally {
-            inventoryList.close();
-        }
-
-    }
 
     public List<Inventory> getForSale() {
         return forSale;
     }
+    public void updateInventory(List<Inventory> forSale){
+        try{
+            inventoryList = new Scanner(inventoryFile); //creates a new scanner which scans for the csv file
+            inventoryList.useDelimiter("|");  //scanner's delimiting pattern to a pattern constructed from the specified String.
 
-    public void setForSale(List<Inventory> forSale) {
-        this.forSale = forSale;
+            String[] wordBy;
+            while (inventoryList.hasNext()){ // While the csv has a next line continue the while loop
+
+                String line = inventoryList.nextLine(); // Read line and store in new String variable
+                wordBy = line.split("\\|"); //Take string and split the words into an array using the pipe symbol
+
+              forSale.add(new Inventory(wordBy[0],wordBy[1],
+                       new BigDecimal(wordBy[2]),wordBy[3])); // Add the words in the array to a list.
+            }
+
+            this.forSale = forSale;
+
+
+        }   catch (Exception e){
+            throw new RuntimeException("This file does not exist");
+
+        } finally {
+            inventoryList.close(); //closes Scanner
+        }
+
     }
+
+    public Map<String, Inventory> getFindItem() {
+        return findItem;
+    }
+
+    public void createInventoryMap(Map<String,Inventory> findItem){
+        for ( Inventory item : forSale){
+            findItem.put(item.vendPosition,item);
+        }
+        this.findItem = findItem;
+
+    }
+
 }
