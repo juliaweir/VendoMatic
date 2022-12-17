@@ -2,6 +2,7 @@ package com.techelevator.currency;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,12 +15,13 @@ public class SalesReport {
     // map and other variables
     Map<String, Integer>  inventorySales = new HashMap<>();
     private BigDecimal totalCost;
+    // reference to cvs file
+    File vendingInventory = new File("C:\\Users\\xbox2\\OneDrive\\Desktop\\Capstone1\\module-1-capstone\\vendingmachine.csv");
 
 
     //method that reads vendingmechine.cvs and populates the inventory sales map and total cost
     public void populateSales(){
-        // reference to cvs file
-        File vendingInventory = new File("C:\\Users\\xbox2\\OneDrive\\Desktop\\Capstone1\\module-1-capstone\\vendingmachine.csv");
+
 
         //try catch blocks
         try(Scanner populateMap = new Scanner (vendingInventory)) {
@@ -34,6 +36,7 @@ public class SalesReport {
                 // only need to add the second element  that is position 1 in array
                 inventorySales.put(findName[1], 0);
             }
+            populateMap.close();
         }
         catch(FileNotFoundException e){
             System.out.println("File not found at" + vendingInventory.getAbsolutePath());
@@ -49,6 +52,19 @@ public class SalesReport {
     // should also update populateMap so it has
     public void updateSalesReport(){
         //nested for loop
+
+        try(Scanner readLog = new Scanner (vendingInventory);  PrintWriter newSalesReport = new PrintWriter("saleReport.txt")){
+            for(String itemName: inventorySales.keySet()){
+                
+
+                for(int i = 0 ; i < inventorySales.size(); i++){
+
+                }
+            }
+
+        }
+        catch(FileNotFoundException e){}
+
         //main for loop goes through map based on key
         //nested for loop goes through log file and compares key using a temp string
         //in nested forloop if the temp string is included in the line from the sales report
