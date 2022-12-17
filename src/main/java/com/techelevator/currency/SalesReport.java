@@ -46,42 +46,46 @@ public class SalesReport {
 
 
 
-    //method that updates map and total cost when sale is made.
-    //does not need to take input, needs to read from log file
-    // and check if the lines contains the same name from the map and if it does update the map
-    // should also update populateMap so it has
+    //method that updates and prints/writes to file
     public void updateSalesReport(){
         //nested for loop
 
-        try(Scanner readLog = new Scanner (vendingInventory);  PrintWriter newSalesReport = new PrintWriter("saleReport.txt")){
+        try(Scanner readLog = new Scanner (vendingInventory)){
             for(String itemName: inventorySales.keySet()){
-                
+                if(readLog.nextLine().contains(itemName)){
+                    //if true first save the string
+                    String tempString = readLog.nextLine();
 
-                for(int i = 0 ; i < inventorySales.size(); i++){
+                    //next update inventory
+                    inventorySales.put(itemName, inventorySales.get(itemName) + 1);
 
+                    //then update the total cost
+                    String findCost = tempString.substring(tempString.indexOf("$"), tempString.length()-6);
+                    totalCost = totalCost.add(new BigDecimal(findCost));
                 }
             }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("File not found at" + vendingInventory.getAbsolutePath());
+        }
+        printSalesReport();
+    }
+
+    public void printSalesReport(){
+        try(PrintWriter newSalesReport = new PrintWriter("saleReport.txt")){
+            //loop through the map and print key and value in key | value format
+            for(Map.Entry keyValue: inventorySales.entrySet()){
+                newSalesReport.println(keyValue.getKey() +  "|" + keyValue.getValue());
+            }
+            newSalesReport.println("");
+            newSalesReport.println("total = " + totalCost);
 
         }
-        catch(FileNotFoundException e){}
+        catch(FileNotFoundException e){
+            System.out.println("File not found at" + vendingInventory.getAbsolutePath());
+        }
 
-        //main for loop goes through map based on key
-        //nested for loop goes through log file and compares key using a temp string
-        //in nested forloop if the temp string is included in the line from the sales report
-        //update the map for that item matching the key
-        // update the total cost
-        //after nested loop is done
-        // print blank line
-        //then print total cost
-
-
-
-
-        //update total cost example
-        //totalCost = totalCost.add(cost);
-
-        //use to update list example
-        //inventorySales.put(name, inventorySales.get(name) + 1);
     }
+
 
 }
