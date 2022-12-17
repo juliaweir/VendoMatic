@@ -2,9 +2,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.techelevator.Logger;
+import com.techelevator.currency.UserBalance;
 
 public class VendingMachineGUI {
     public static void main(String[] args) {
+        //instantiate objects to maintain user state
+        UserBalance userBalance = new UserBalance(BigDecimal.ZERO);
+
         //instantiate the main window, panels for the three buttons, and a layout to change button status
         JFrame frame = new JFrame("UMBRELLA TOTALLY NOT SUS VENDO-MATIC 800");
         JPanel corePanel = new JPanel();
@@ -15,16 +24,19 @@ public class VendingMachineGUI {
         //instantiate the buttons for the topPanel
         JButton displayButton = new JButton("Display Purchase Items");
         JButton goToPurchaseButton = new JButton("Go to Purchase Menu");
-        JButton exitButton = new JButton("Exit and Take Change");
+        JButton exitButton = new JButton("Exit Program");
         JButton feedButton = new JButton("Enter Money & Feed");
         JButton buyButton = new JButton("Enter Slot & Purchase");
-        JButton goToCoreButton = new JButton("Finish Transaction");
+        JButton changeButton = new JButton("Take Change & Finish");
 
         //instantiate the textbox for inputting the key to each item to make purchases and pull sales
         TextField userInput = new TextField();
 
-        //instantiate a label to display data to the user
-        JLabel appOutput = new JLabel();
+        //instantiate a label to display data to the user and a scrollbar
+        JTextArea appOutput = new JTextArea();
+
+        //appOutput settings
+        appOutput.setEditable(false);
 
         //set cardLayout in the panel to hold the buttons
         topPanel.setLayout(cardLayout);
@@ -35,7 +47,7 @@ public class VendingMachineGUI {
         corePanel.add(exitButton);
         purchasePanel.add(feedButton);
         purchasePanel.add(buyButton);
-        purchasePanel.add(goToCoreButton);
+        purchasePanel.add(changeButton);
 
         //add the button panels to the cardLayout and set constraints to switch button settings
         topPanel.add(corePanel, "core");
@@ -52,14 +64,17 @@ public class VendingMachineGUI {
         //frame settings
         frame.setSize(600, 600);
         frame.setVisible(true);
+
+        //do nothing on close so user doesn't lose any change, must exit via the menu option.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //and finally where all the action is... press buttons and fun stuff happens!
-
         displayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-
+                /*Empty appOutput with setText() and call the Inventory class's map.
+                Use a for loop to display each item in the map line by line in appOutput.
+                 */
             }
         });
 
@@ -73,14 +88,21 @@ public class VendingMachineGUI {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-
+            System.exit(0);
             }
         });
 
         feedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-
+                appOutput.setText("");
+                try{
+                    double deposit = Double.parseDouble(userInput.getText());
+                    userBalance.addBalance(BigDecimal.valueOf(deposit));
+                } catch (NumberFormatException e){
+                    appOutput.append("Please put numbers in the format xx.xx\n");
+                }
+                appOutput.append("Your balance is " + userBalance.printBalance());
             }
         });
 
@@ -89,12 +111,26 @@ public class VendingMachineGUI {
             public void actionPerformed(ActionEvent arg0) {
 //would log here if something was bought?
                 //would need to instantiate an object
+
             }
         });
 
-        goToCoreButton.addActionListener(new ActionListener() {
+        changeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
+                //empty appOutput
+                appOutput.setText("");
+                //make map to accept returnChange output and get coins
+                Map<String, Integer> change = new HashMap<>();
+                //pull the map for the change
+                change = userBalance.returnChange(userBalance.getBalance());
+                for (Map.Entry<String, Integer> set : change.entrySet()){
+                    String line = set.getKey() + ": " + set.getValue() + "\n";
+                    appOutput.append(line);
+                }
+                appOutput.append("Your total change is: " + userBalance.printBalance());
+                userBalance.subtractBalance(userBalance.getBalance());
+
                 cardLayout.show(topPanel, "core");
             }
         });

@@ -9,9 +9,9 @@ public abstract class Money {
         this.balance = balance;
     }
 
-    public void printBalance() {
+    public String printBalance() {
         //print balance in things like logs or the console with ensured precision and a dollar sign
-        System.out.printf("$" + "'.2f'", balance);
+        return String.format("$%.2f", balance);
     }
 
     public BigDecimal getBalance() {
