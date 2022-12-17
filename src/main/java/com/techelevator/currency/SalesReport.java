@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,10 +12,10 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class SalesReport {
-
+    BigDecimal totalCost;
     // map and other variables
     Map<String, Integer>  inventorySales = new HashMap<>();
-    private BigDecimal totalCost;
+    //private BigDecimal totalCost = new BigDecimal(0.00);
     // reference to cvs file
     File vendingInventory = new File("C:\\Users\\xbox2\\OneDrive\\Desktop\\Capstone1\\module-1-capstone\\vendingmachine.csv");
 
@@ -44,45 +45,58 @@ public class SalesReport {
 
     }
 
-
+    File logger = new File("C:\\Users\\xbox2\\OneDrive\\Desktop\\Capstone1\\module-1-capstone\\log.txt");
 
     //method that updates and prints/writes to file
     public void updateSalesReport(){
-        //nested for loop
+        //populates the sales report with current inventory
+        populateSales();
 
-        try(Scanner readLog = new Scanner (vendingInventory)){
-            for(String itemName: inventorySales.keySet()){
-                if(readLog.nextLine().contains(itemName)){
-                    //if true first save the string
-                    String tempString = readLog.nextLine();
+        //variables needed for big decimal
+        MathContext mc = new MathContext(4);
+        double tempCost = 0.00;
 
-                    //next update inventory
-                    inventorySales.put(itemName, inventorySales.get(itemName) + 1);
+        //try and catch where inventory and total cost gets updated
+        try(Scanner readLog = new Scanner (logger)){
+            while (readLog.hasNextLine()){
+                String templine = readLog.nextLine();
+                for(String itemName: inventorySales.keySet()) {
+                    if(templine.contains(itemName)){
 
-                    //then update the total cost
-                    String findCost = tempString.substring(tempString.indexOf("$"), tempString.length()-6);
-                    totalCost = totalCost.add(new BigDecimal(findCost));
+                        //update num sold of item
+                        inventorySales.put(itemName, inventorySales.get(itemName) + 1);
+
+                        //isolate the cost of the item from the string in the log.txt file
+                        String findCost = templine.substring(templine.indexOf("$")+1, templine.length()-6);
+
+                        //update the value of the double
+                        tempCost += Double.parseDouble(findCost);
+
+                        //make the total cost reflect the current cost of the double
+                        totalCost = new BigDecimal(tempCost, mc);
+                    }
                 }
             }
         }
         catch(FileNotFoundException e){
-            System.out.println("File not found at" + vendingInventory.getAbsolutePath());
+            System.out.println("no log.txt found");
+            System.out.println("No sales report available");
         }
-        printSalesReport();
+        printSalesReport(totalCost);
     }
 
-    public void printSalesReport(){
+    public void printSalesReport(BigDecimal totals){
         try(PrintWriter newSalesReport = new PrintWriter("saleReport.txt")){
             //loop through the map and print key and value in key | value format
             for(Map.Entry keyValue: inventorySales.entrySet()){
                 newSalesReport.println(keyValue.getKey() +  "|" + keyValue.getValue());
             }
             newSalesReport.println("");
-            newSalesReport.println("total = " + totalCost);
+            newSalesReport.println("total = " + totals);
 
         }
         catch(FileNotFoundException e){
-            System.out.println("File not found at" + vendingInventory.getAbsolutePath());
+            System.out.println("File not found or created");
         }
 
     }

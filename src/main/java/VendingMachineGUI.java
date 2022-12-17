@@ -7,12 +7,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.techelevator.Logger;
+import com.techelevator.currency.SalesReport;
 import com.techelevator.currency.UserBalance;
 
 public class VendingMachineGUI {
     public static void main(String[] args) {
         //instantiate objects to maintain user state
         UserBalance userBalance = new UserBalance(BigDecimal.ZERO);
+        SalesReport saleReports = new SalesReport();
 
         //instantiate the main window, panels for the three buttons, and a layout to change button status
         JFrame frame = new JFrame("UMBRELLA TOTALLY NOT SUS VENDO-MATIC 800");
@@ -72,7 +74,12 @@ public class VendingMachineGUI {
         displayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                /*Empty appOutput with setText() and call the Inventory class's map.
+
+                if(userInput.getText().contains("sales")){
+                    saleReports.updateSalesReport();
+                }
+                /*alfred: made changes for sales report and debugged code for sales report.
+                Empty appOutput with setText() and call the Inventory class's map.
                 Use a for loop to display each item in the map line by line in appOutput.
                  */
             }
@@ -95,6 +102,7 @@ public class VendingMachineGUI {
         feedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
+
                 appOutput.setText("");
                 try{
                     double deposit = Double.parseDouble(userInput.getText());
