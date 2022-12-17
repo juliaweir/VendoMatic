@@ -4,6 +4,7 @@ package com.techelevator.products;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,7 +27,7 @@ public class UpdateInventory {
                 wordBy = line.split("\\|"); //like csv
 
                forSale.add(new Inventory(wordBy[0],wordBy[1],
-                       Double.parseDouble(wordBy[2]),wordBy[3]));
+                       new BigDecimal(wordBy[2]),wordBy[3]));
             }
             return forSale;
 

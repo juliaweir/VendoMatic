@@ -1,12 +1,12 @@
 package com.techelevator;
 
+import com.techelevator.currency.UserBalance;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Logger {
-    public Logger() throws IOException {
-    }
 
     public static void log(String message) throws FileNotFoundException{
     String filePath = "log.txt";
@@ -14,7 +14,7 @@ public class Logger {
     try (
             PrintWriter writer = new PrintWriter(log);
     ){
-      //  writer.format(LocalDate.now().format(DateTimeFormatter.ISO_DATE, amountSpent, newBalance)) //after date, maybe string? string?
+       // writer.format(LocalDate.now().format(DateTimeFormatter.ISO_DATE,)) //after date, maybe string? string?
         writer.println();
     } catch (FileNotFoundException e) {
         System.out.println("Log file not found");
@@ -22,8 +22,9 @@ public class Logger {
         throw new RuntimeException(e);
     }
     }
-    //want to include a method logPurchase that records when a purchase happens
-
+    //want to include a method logPurchase or Sale getting inventory and user bal
+//logDeposit from getting user balance
+    //logChange get from user balance
 }
 //vendingmachine.csv
 
