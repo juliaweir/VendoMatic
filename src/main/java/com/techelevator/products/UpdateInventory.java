@@ -48,9 +48,32 @@ public class UpdateInventory {
     }
 
     public void createInventoryMap(Map<String,Inventory> findItem){
+
         for ( Inventory item : forSale){
-            findItem.put(item.vendPosition,item);
+
+            if(item.getType().equalsIgnoreCase("Chip")){
+
+                findItem.put(item.vendPosition,new Chips(item.vendPosition,
+                        item.getProductName(),
+                        item.getPrice(),item.getType()));
+            } else if (item.getType().equals("Drink")) {
+
+                findItem.put(item.vendPosition,new Drink(item.vendPosition,
+                        item.getProductName(),
+                        item.getPrice(),item.getType()));
+            } else if(item.getType().equals("Gum")){
+
+                findItem.put(item.vendPosition,new Gum(item.vendPosition,
+                        item.getProductName(),
+                        item.getPrice(),item.getType()));
+            }else {
+
+                findItem.put(item.vendPosition,new Candy(item.vendPosition,
+                        item.getProductName(),
+                        item.getPrice(),item.getType()));
+            }
         }
+
         this.findItem = findItem;
 
     }
