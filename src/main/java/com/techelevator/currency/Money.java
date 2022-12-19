@@ -18,7 +18,7 @@ public abstract class Money {
         return balance;
     }
 
-    public void addBalance(BigDecimal deposit){
+    public static void addBalance(BigDecimal deposit){
         this.balance = this.balance.add(deposit);
     }
 

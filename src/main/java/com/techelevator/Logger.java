@@ -1,6 +1,5 @@
 package com.techelevator;
 
-import com.techelevator.currency.UserBalance;
 import com.techelevator.products.Inventory;
 
 import java.io.File;
@@ -15,7 +14,7 @@ public class Logger {
     static File log = new File("log.txt");
 
     public static void logFeedMoney(String moneyFed) throws FileNotFoundException {
-        // String feedData = UserBalance.addBalance();
+       // String feedData = UserBalance.addBalance();
         try (
                 PrintWriter writer = new PrintWriter(log);
         ) {
