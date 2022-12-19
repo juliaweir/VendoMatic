@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface textDisplay {
 
-     void purchaseMessage();
+     String purchaseMessage();
 
 }

@@ -11,7 +11,7 @@ public class Candy extends Inventory implements textDisplay {
     }
 
     @Override
-    public void purchaseMessage(){
-        System.out.println("Munch Munch, Yum!");
+    public String purchaseMessage(){
+        return "Munch Munch, Yum!";
     }
 }

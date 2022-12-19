@@ -9,8 +9,8 @@ public class Chips extends Inventory implements textDisplay {
     }
 
     @Override
-    public  void purchaseMessage(){
-        System.out.println("Crunch Crunch, Yum!");
+    public String purchaseMessage(){
+        return "Crunch Crunch, Yum!";
 
     }
 }

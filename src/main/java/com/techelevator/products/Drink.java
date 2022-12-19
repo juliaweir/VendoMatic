@@ -9,7 +9,7 @@ public class Drink extends Inventory implements textDisplay{
     }
 
     @Override
-    public  void purchaseMessage(){
-        System.out.println("Glug Glug, Yum!");
+    public String purchaseMessage(){
+        return "Glug Glug, Yum!";
     }
 }

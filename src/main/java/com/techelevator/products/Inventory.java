@@ -66,7 +66,23 @@ public class Inventory {
                 getProductName().trim(),
                 getPrice().toString().trim(),
                 getStockOf());
-
-
     }
+
+    public String getPurchaseMessage(Inventory item){
+        switch (item.getType()) {
+            case "Candy" :
+                return "Munch Munch, Yum!";
+
+            case "Chip" :
+                return "Crunch Crunch, Yum!";
+
+            case "Drink" :
+                return "Glug Glug, Yum!";
+
+            case "Gum" :
+                return "Chew Chew, Yum!";
+        }
+        return "";
+    }
+
 }

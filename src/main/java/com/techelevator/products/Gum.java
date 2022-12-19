@@ -11,8 +11,8 @@ public class Gum extends Inventory implements textDisplay {
     }
 
     @Override
-    public  void purchaseMessage(){
-        System.out.println("Chew Chew, Yum!");
+    public String purchaseMessage(){
+        return "Chew Chew, Yum!";
 
     }
 

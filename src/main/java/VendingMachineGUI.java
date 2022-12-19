@@ -13,12 +13,15 @@ import com.techelevator.currency.UserBalance;
 import com.techelevator.products.DisplayMessages;
 import com.techelevator.products.Inventory;
 import com.techelevator.products.UpdateInventory;
+import com.techelevator.products.*;
 
 public class VendingMachineGUI {
     public static void main(String[] args) {
-        //instantiate objects to maintain user state
+        //instantiate objects to maintain program state
         UserBalance userBalance = new UserBalance(BigDecimal.ZERO);
         SalesReport saleReports = new SalesReport();
+        UpdateInventory products = new UpdateInventory();
+        List<Inventory> forSale = products.updateInventory();
 
         //instantiate the main window, panels for the three buttons, and a layout to change button status
         JFrame frame = new JFrame("UMBRELLA TOTALLY NOT SUS VENDO-MATIC 800");
@@ -87,20 +90,9 @@ public class VendingMachineGUI {
                 Use a for loop to display each item in the map line by line in appOutput.
                  */
                 appOutput.setText("");
-
-                UpdateInventory products = new UpdateInventory();
-                List<Inventory> forSale = products.updateInventory();
-
                 for(Inventory item : forSale){
-
                     appOutput.append(item.toString());
-
                 }
-
-
-
-
-
             }
         });
 
@@ -121,24 +113,35 @@ public class VendingMachineGUI {
         feedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-
                 appOutput.setText("");
                 try{
                     double deposit = Double.parseDouble(userInput.getText());
                     userBalance.addBalance(BigDecimal.valueOf(deposit));
+                    //TODO log feed money action
                 } catch (NumberFormatException e){
                     appOutput.append("Please put numbers in the format xx.xx\n");
                 }
-                appOutput.append("Your balance is " + userBalance.printBalance());
+                appOutput.append("Your balance is " + userBalance.printBalance() + "\n");
             }
         });
 
         buyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-//would log here if something was bought?
-                //would need to instantiate an object
-
+                //get the position of the vending machine item
+                String position = userInput.getText();
+                //loop through the item list to find the item associated with the position
+                for (Inventory item : forSale){
+                    //if the position is a match, purchase the item
+                    if (item.getVendPosition().equalsIgnoreCase(position)) {
+                        userBalance.subtractBalance(item.getPrice());
+                        appOutput.append("Your new balance after purchase is: " + userBalance.getBalance() + "\n");
+                        //display the unique item output based on item purchased
+                        appOutput.append(item.getPurchaseMessage(item) + "\n");
+                        //TODO: log sale
+                        break;
+                    }
+            }
             }
         });
 
@@ -147,14 +150,13 @@ public class VendingMachineGUI {
             public void actionPerformed(ActionEvent arg0) {
                 //empty appOutput
                 appOutput.setText("");
-                //make map to accept returnChange output and get coins
-                Map<String, Integer> change = new HashMap<>();
-                //pull the map for the change
-                change = userBalance.returnChange(userBalance.getBalance());
+                //make map with output change
+                Map<String, Integer> change = userBalance.returnChange(userBalance.getBalance());
                 for (Map.Entry<String, Integer> set : change.entrySet()){
                     String line = set.getKey() + ": " + set.getValue() + "\n";
                     appOutput.append(line);
                 }
+                //TODO log chage output action
                 appOutput.append("Your total change is: " + userBalance.printBalance());
                 userBalance.subtractBalance(userBalance.getBalance());
 
