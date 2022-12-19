@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import com.techelevator.currency.Money;
 import com.techelevator.products.Inventory;
 
 import java.io.File;
@@ -7,7 +8,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+
 
 public class Logger {
     String filePath = "log.txt";
@@ -18,8 +22,9 @@ public class Logger {
         try (
                 PrintWriter writer = new PrintWriter(log);
         ) {
-            writer.format(LocalDate.now().format(DateTimeFormatter.ISO_DATE));
-            //        writer.write(feedData);
+
+            writer.format(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
+            //        writer.write(" "+ feedData);
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
         } catch (IOException e) {
@@ -32,8 +37,8 @@ public class Logger {
         try (
                 PrintWriter writer = new PrintWriter(log);
         ) {
-            writer.format(LocalDate.now().format(DateTimeFormatter.ISO_DATE));
-            writer.write(saleData);
+            writer.format(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
+            writer.write(" " +saleData);
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
         } catch (IOException e) {
@@ -42,12 +47,13 @@ public class Logger {
     }
 
     public static void changeOutput(String message) throws FileNotFoundException {
-       // String changeGiven =
+        String changeGiven = Money.printBalance();
         try (
                 PrintWriter writer = new PrintWriter(log);
         ) {
-            writer.format(LocalDate.now().format(DateTimeFormatter.ISO_DATE));
-         //   writer.write(changeGiven);
+            writer.format(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
+
+            writer.write(" " +changeGiven);
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
         } catch (IOException e) {

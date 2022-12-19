@@ -143,6 +143,11 @@ public class VendingMachineGUI {
                         //display the unique item output based on item purchased
                         appOutput.append(item.getPurchaseMessage(item) + "\n");
                         //TODO: log sale
+                        try {
+                            Logger.logSale(item.getProductName());
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
                         break;
                     }
             }
@@ -161,6 +166,11 @@ public class VendingMachineGUI {
                     appOutput.append(line);
                 }
                 //TODO log chage output action
+                try {
+                    Logger.changeOutput(userBalance.printBalance());
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
                 appOutput.append("Your total change is: " + userBalance.printBalance());
                 userBalance.subtractBalance(userBalance.getBalance());
 
