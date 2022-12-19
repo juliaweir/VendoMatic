@@ -1,4 +1,4 @@
-package com.techelevator.view;
+/* package com.techelevator.view;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -98,3 +98,4 @@ public class MenuTest {
 		return getMenuForTestingWithUserInput("1" + System.lineSeparator());
 	}
 }
+*/
