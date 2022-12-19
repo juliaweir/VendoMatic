@@ -8,7 +8,7 @@ public class Inventory {
     protected String vendPosition;  //protected, encapsulated code to restrict access to the meet the exact level of access needed
     protected String productName;
 
-    protected BigDecimal price;
+    protected static BigDecimal price;
 
     protected String type;
 
@@ -30,12 +30,12 @@ public class Inventory {
         this.productName = productName;
     }
 
-    public BigDecimal getPrice() {
+    public static BigDecimal getPrice() {
         return price;
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = price;
+        Inventory.price = price;
     }
 
     public String getType() {

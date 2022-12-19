@@ -7,7 +7,7 @@ with everyone's bank accounts, allowing customers to purchase products from thei
 ### Application requirements
 
 1. The vending machine dispenses beverages, candy, chips, and gum.
-   - Each vending machine item has a Name and a Price.
+   - Each vending machine item has a Name and a Price. 
 2. A main menu must display when the software runs, presenting the following options: 
     > ```
     > (1) Display Vending Machine Items

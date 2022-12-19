@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -118,8 +119,11 @@ public class VendingMachineGUI {
                     double deposit = Double.parseDouble(userInput.getText());
                     userBalance.addBalance(BigDecimal.valueOf(deposit));
                     //TODO log feed money action
+                    Logger.logFeedMoney(userInput.getText());
                 } catch (NumberFormatException e){
                     appOutput.append("Please put numbers in the format xx.xx\n");
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
                 }
                 appOutput.append("Your balance is " + userBalance.printBalance() + "\n");
             }
