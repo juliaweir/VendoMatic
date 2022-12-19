@@ -16,7 +16,7 @@ public class UpdateInventory {
     public List<Inventory> getForSale() {
         return forSale;
     }
-    public void updateInventory(List<Inventory> forSale){
+    public List<Inventory> updateInventory(){
         try{
             inventoryList = new Scanner(inventoryFile); //creates a new scanner which scans for the csv file
             inventoryList.useDelimiter("|");  //scanner's delimiting pattern to a pattern constructed from the specified String.
@@ -31,7 +31,7 @@ public class UpdateInventory {
                        new BigDecimal(wordBy[2]),wordBy[3])); // Add the words in the array to a list.
             }
 
-            this.forSale = forSale;
+           return forSale;
 
 
         }   catch (Exception e){
@@ -47,7 +47,7 @@ public class UpdateInventory {
         return findItem;
     }
 
-    public void createInventoryMap(Map<String,Inventory> findItem){
+    public Map<String, Inventory> createInventoryMap(){
 
         for ( Inventory item : forSale){
 
@@ -73,8 +73,7 @@ public class UpdateInventory {
                         item.getPrice(),item.getType()));
             }
         }
-
-        this.findItem = findItem;
+        return  findItem;
 
     }
 

@@ -5,10 +5,14 @@ import java.awt.event.ActionEvent;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 import com.techelevator.Logger;
 import com.techelevator.currency.SalesReport;
 import com.techelevator.currency.UserBalance;
+import com.techelevator.products.DisplayMessages;
+import com.techelevator.products.Inventory;
+import com.techelevator.products.UpdateInventory;
 
 public class VendingMachineGUI {
     public static void main(String[] args) {
@@ -82,6 +86,21 @@ public class VendingMachineGUI {
                 Empty appOutput with setText() and call the Inventory class's map.
                 Use a for loop to display each item in the map line by line in appOutput.
                  */
+                appOutput.setText("");
+
+                UpdateInventory products = new UpdateInventory();
+                List<Inventory> forSale = products.updateInventory();
+
+                for(Inventory item : forSale){
+
+                    appOutput.append(item.toString());
+
+                }
+
+
+
+
+
             }
         });
 

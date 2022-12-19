@@ -57,4 +57,16 @@ public class Inventory {
     public int getStockOf() {return stockOf;}
 
     public void setStockOf(int stockOf) {this.stockOf = stockOf;}
+
+    @Override
+    public String toString(){
+
+        return   String.format("| %s | %-30s | Price : $%-5s and Quantity : %s |\n",
+                getVendPosition(),
+                getProductName().trim(),
+                getPrice().toString().trim(),
+                getStockOf());
+
+
+    }
 }
