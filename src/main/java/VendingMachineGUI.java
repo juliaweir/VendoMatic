@@ -119,7 +119,7 @@ public class VendingMachineGUI {
                     double deposit = Double.parseDouble(userInput.getText());
                     userBalance.addBalance(BigDecimal.valueOf(deposit));
                     //TODO log feed money action
-                    Logger.logFeedMoney(userInput.getText());
+                    Logger.logFeedMoney(String.valueOf(deposit));
                 } catch (NumberFormatException e){
                     appOutput.append("Please put numbers in the format xx.xx\n");
                 } catch (FileNotFoundException e) {
@@ -142,9 +142,10 @@ public class VendingMachineGUI {
                         appOutput.append("Your new balance after purchase is: " + userBalance.getBalance() + "\n");
                         //display the unique item output based on item purchased
                         appOutput.append(item.getPurchaseMessage(item) + "\n");
-                        //TODO: log sale
+                        //log sale
+
                         try {
-                            Logger.logSale(item.getProductName());
+                            Logger.logSale(item.getPurchaseMessage(item));
                         } catch (FileNotFoundException e) {
                             throw new RuntimeException(e);
                         }
@@ -165,7 +166,7 @@ public class VendingMachineGUI {
                     String line = set.getKey() + ": " + set.getValue() + "\n";
                     appOutput.append(line);
                 }
-                //TODO log chage output action
+                //log change output
                 try {
                     Logger.changeOutput(userBalance.printBalance());
                 } catch (FileNotFoundException e) {
