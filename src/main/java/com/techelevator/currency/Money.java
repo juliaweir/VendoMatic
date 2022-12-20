@@ -3,7 +3,7 @@ package com.techelevator.currency;
 import java.math.BigDecimal;
 
 public abstract class Money {
-    private static BigDecimal balance;
+    static BigDecimal balance;
 
     public Money(BigDecimal balance) {
         Money.balance = balance;

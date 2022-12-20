@@ -6,6 +6,7 @@ import java.util.*;
 
 public class UpdateInventory {
     private File inventoryFile = new File("vendingmachine.csv");
+
     private List<Inventory> forSale = new ArrayList<>();
 
    private Map<String,Inventory> findItem = new HashMap<>();

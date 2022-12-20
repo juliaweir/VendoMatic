@@ -3,10 +3,8 @@ package com.techelevator;
 import com.techelevator.currency.Money;
 import com.techelevator.products.Inventory;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,14 +14,11 @@ public class Logger {
     String filePath = "log.txt";
     static File log = new File("log.txt");
 
-    public static void logFeedMoney(String moneyFed) throws FileNotFoundException {
-       // String feedData = UserBalance.addBalance();
+    public static void logFeedMoney(BigDecimal userFed,BigDecimal userBalance) throws FileNotFoundException {
         try (
-                PrintWriter writer = new PrintWriter(log);
+                PrintWriter writer = new PrintWriter(new FileOutputStream(log), true );
         ) {
-
-            writer.format(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
-            //        writer.write(" "+ feedData);
+            writer.println(LocalDateTime.now() + "USER FED MONEY" + userFed + userBalance);
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
         } catch (IOException e) {
@@ -34,10 +29,9 @@ public class Logger {
     public static void logSale(String message) throws FileNotFoundException {
         String saleData = String.valueOf(Inventory.getPrice());
         try (
-                PrintWriter writer = new PrintWriter(log);
+                PrintWriter writer = new PrintWriter(new FileOutputStream(log), true);
         ) {
-            writer.format(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
-            writer.write(" " +saleData);
+            writer.println(LocalDateTime.now() + " " +saleData);
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
         } catch (IOException e) {
@@ -48,11 +42,9 @@ public class Logger {
     public static void changeOutput(String message) throws FileNotFoundException {
         String changeGiven = Money.printBalance();
         try (
-                PrintWriter writer = new PrintWriter(log);
+                PrintWriter writer = new PrintWriter(new FileOutputStream(log), true);
         ) {
-            writer.format(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
-
-            writer.write(" " +changeGiven);
+            writer.println(LocalDateTime.now() + " " +changeGiven);
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
         } catch (IOException e) {
@@ -60,20 +52,3 @@ public class Logger {
         }
     }
 }
-        //want to include a method logPurchase or Sale getting inventory and user bal
-//logDeposit from getting user balance,
-        //logChange get from user balance
-
-//vendingmachine.csv
-//taking user input into string var,
-//logSale get price from inventory
-//logFeedMoney get from user balance
-//logGetChange done inside gui?, getting a double the GUI
-//calling getPrice in
-//calling inventory item into logger, get price method on item
-//to log item you are pulling into param in method
-//using item method .getprice from to populate logger
-//use toString method for BigDecimal
-//from user input, pull from where the user types into text box
-
-//LocalDate.now().format(DateTimeFormatter.ISO_DATE)

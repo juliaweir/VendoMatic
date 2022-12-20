@@ -119,7 +119,7 @@ public class VendingMachineGUI {
                     double deposit = Double.parseDouble(userInput.getText());
                     userBalance.addBalance(BigDecimal.valueOf(deposit));
                     //TODO log feed money action
-                    Logger.logFeedMoney(" ");
+                    Logger.logFeedMoney(BigDecimal.valueOf(deposit), userBalance.getBalance());
                 } catch (NumberFormatException e){
                     appOutput.append("Please enter numbers in the format xx.xx\n");
                 } catch (FileNotFoundException e) {
