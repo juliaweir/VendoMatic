@@ -17,7 +17,7 @@ public class SalesReport {
     Map<String, Integer>  inventorySales = new HashMap<>();
     //private BigDecimal totalCost = new BigDecimal(0.00);
     // reference to cvs file
-    File vendingInventory = new File("C:\\Users\\xbox2\\OneDrive\\Desktop\\Capstone1\\module-1-capstone\\vendingmachine.csv");
+    File vendingInventory = new File("vendingmachine.csv");
 //can we create relative path here?
 
     //method that reads vendingmechine.cvs and populates the inventory sales map and total cost
