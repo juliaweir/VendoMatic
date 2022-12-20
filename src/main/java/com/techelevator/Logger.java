@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import com.techelevator.currency.Money;
+import com.techelevator.currency.UserBalance;
 import com.techelevator.products.Inventory;
 
 import java.io.*;
@@ -25,10 +26,8 @@ public class Logger {
 
         try (
                 FileOutputStream writer = new FileOutputStream(log, true)
-
-                //     PrintWriter writer = new PrintWriter(log);
         ) {
-            String feedData = getDate_Time() + " " + userFed + userBalance + "\n"; //getBytes for one string instead of multiple
+            String feedData = getDate_Time() + " $" + userFed + " $" + userBalance + "\n"; //getBytes for one string instead of multiple
             writer.write(feedData.getBytes());
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
@@ -37,12 +36,12 @@ public class Logger {
         }
     }
 
-    public static void logSale(String message) throws FileNotFoundException {
-        String saleData = (Inventory.getPrice().toString());
+    public static void logSale(BigDecimal price) throws FileNotFoundException {
+        String saleData = " $" + price.toString() + " " + UserBalance.printBalance();
         try (
                 FileOutputStream writer = new FileOutputStream(log, true)
         ) {
-            String saleInfo = getDate_Time() + " " +saleData + "\n";
+            String saleInfo = getDate_Time() +saleData + "\n";
             writer.write(saleInfo.getBytes());
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
@@ -51,12 +50,12 @@ public class Logger {
         }
     }
 
-    public static void changeOutput(String message) throws FileNotFoundException {
-        String changeGiven = Money.printBalance();
+    public static void changeOutput(String message, String balance) throws FileNotFoundException {
+        String changeGiven = message;
         try (
                 FileOutputStream writer = new FileOutputStream(log, true)
         ) {
-            String changeData = getDate_Time() + " " +changeGiven + "\n";
+            String changeData = getDate_Time() + " $" +changeGiven + " $" + balance + "\n";
             writer.write(changeData.getBytes());
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");

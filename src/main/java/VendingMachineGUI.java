@@ -157,7 +157,7 @@ public class VendingMachineGUI {
                             appOutput.append(item.getPurchaseMessage(item) + "\n");
                             //log sale
                             try {
-                                Logger.logSale(item.getPurchaseMessage(item));
+                                Logger.logSale(item.getPrice());
                             } catch (FileNotFoundException e) {
                                 throw new RuntimeException(e);
                             }
@@ -171,6 +171,7 @@ public class VendingMachineGUI {
         changeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
+                String userBalanceBeforeChange = userBalance.getBalance().toString();
                 //empty appOutput
                 appOutput.setText("");
                 //make map with output change
@@ -179,14 +180,17 @@ public class VendingMachineGUI {
                     String line = set.getKey() + ": " + set.getValue() + "\n";
                     appOutput.append(line);
                 }
+
+
+                appOutput.append("Your total change is: " + userBalance.printBalance());
+                userBalance.subtractBalance(userBalance.getBalance());
                 //log change output
                 try {
-                    Logger.changeOutput(userBalance.printBalance());
+                    Logger.changeOutput(userBalanceBeforeChange, userBalance.getBalance().toString());
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }
-                appOutput.append("Your total change is: " + userBalance.printBalance());
-                userBalance.subtractBalance(userBalance.getBalance());
+
 
                 cardLayout.show(topPanel, "core");
             }

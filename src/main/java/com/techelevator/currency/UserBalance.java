@@ -23,6 +23,7 @@ public class UserBalance extends Money implements Depositable {
         int nickels = 0;
 
         //loop through the decimal portion to get the change
+        //declare value of all coins, no magic numbers
         while (balance.compareTo(BigDecimal.valueOf(.25)) >= 0){
             balance = balance.subtract(BigDecimal.valueOf(.25));
             quarters++;
