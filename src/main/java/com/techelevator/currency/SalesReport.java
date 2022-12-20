@@ -45,7 +45,7 @@ public class SalesReport {
 
     }
 
-    File logger = new File("C:\\Users\\xbox2\\OneDrive\\Desktop\\Capstone1\\module-1-capstone\\log.txt");
+    File logger = new File("log.txt");
 
     //method that updates and prints/writes to file
     public void updateSalesReport(){

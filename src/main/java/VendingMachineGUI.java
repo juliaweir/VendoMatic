@@ -119,9 +119,9 @@ public class VendingMachineGUI {
                     double deposit = Double.parseDouble(userInput.getText());
                     userBalance.addBalance(BigDecimal.valueOf(deposit));
                     //TODO log feed money action
-                    Logger.logFeedMoney(String.valueOf(deposit));
+                    Logger.logFeedMoney(" ");
                 } catch (NumberFormatException e){
-                    appOutput.append("Please put numbers in the format xx.xx\n");
+                    appOutput.append("Please enter numbers in the format xx.xx\n");
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }
@@ -132,26 +132,39 @@ public class VendingMachineGUI {
         buyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
+                appOutput.setText("");
                 //get the position of the vending machine item
                 String position = userInput.getText();
                 //loop through the item list to find the item associated with the position
-                for (Inventory item : forSale){
+                for (Inventory item : forSale) {
                     //if the position is a match, purchase the item
                     if (item.getVendPosition().equalsIgnoreCase(position)) {
-                        userBalance.subtractBalance(item.getPrice());
-                        appOutput.append("Your new balance after purchase is: " + userBalance.getBalance() + "\n");
-                        //display the unique item output based on item purchased
-                        appOutput.append(item.getPurchaseMessage(item) + "\n");
-                        //log sale
-
-                        try {
-                            Logger.logSale(item.getPurchaseMessage(item));
-                        } catch (FileNotFoundException e) {
-                            throw new RuntimeException(e);
+                        if (item.getStockOf() == 0) {
+                            appOutput.append("The item is out of stock.  We apologize for the inconvenience.\n");
+                            break;
+                        } else if (userBalance.getBalance().compareTo(item.getPrice()) < 0) {
+                            appOutput.append("You lack the funds to purchase this item.  Prepare to be zombified.\n");
+                            break;
+                        } else {
+                            //reduce the stock of the item by one
+                            item.dispense();
+                            //display product name, price, and remaining balance
+                            appOutput.append("You have bought " + item.getProductName() + "\n");
+                            appOutput.append("This item cost " + item.getPrice() + "\n");
+                            userBalance.subtractBalance(item.getPrice());
+                            appOutput.append("Your remaining balance after purchase is: " + userBalance.getBalance() + "\n");
+                            //display the unique item output based on item purchased
+                            appOutput.append(item.getPurchaseMessage(item) + "\n");
+                            //log sale
+                            try {
+                                Logger.logSale(item.getPurchaseMessage(item));
+                            } catch (FileNotFoundException e) {
+                                throw new RuntimeException(e);
+                            }
+                            break;
                         }
-                        break;
                     }
-            }
+                }
             }
         });
 

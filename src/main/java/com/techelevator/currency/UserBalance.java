@@ -16,16 +16,11 @@ public class UserBalance extends Money implements Depositable {
         this.addBalance(deposit);
     }
 
-    public void purchaseItem(Inventory item){
-        this.subtractBalance(item.getPrice());
-    }
-
     public Map<String, Integer> returnChange(BigDecimal balance){
         //declare coins
         int quarters = 0;
         int dimes = 0;
         int nickels = 0;
-        int pennies = 0;
 
         //loop through the decimal portion to get the change
         while (balance.compareTo(BigDecimal.valueOf(.25)) >= 0){
@@ -36,7 +31,7 @@ public class UserBalance extends Money implements Depositable {
             balance = balance.subtract(BigDecimal.valueOf(.1));
             dimes++;
         }
-        while (balance.compareTo(BigDecimal.valueOf(.5)) >= 0){
+        while (balance.compareTo(BigDecimal.valueOf(.05)) >= 0){
             balance = balance.subtract(BigDecimal.valueOf(.5));
             nickels++;
         }

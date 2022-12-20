@@ -85,4 +85,8 @@ public class Inventory {
         return "";
     }
 
+    public void dispense(){
+        this.stockOf--;
+    }
+
 }
