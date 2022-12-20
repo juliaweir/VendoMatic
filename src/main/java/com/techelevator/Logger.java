@@ -15,10 +15,14 @@ public class Logger {
     static File log = new File("log.txt");
 
     public static void logFeedMoney(BigDecimal userFed,BigDecimal userBalance) throws FileNotFoundException {
+
         try (
-                PrintWriter writer = new PrintWriter(new FileOutputStream(log), true );
+                FileOutputStream writer = new FileOutputStream(log, true)
+
+                //     PrintWriter writer = new PrintWriter(log);
         ) {
-            writer.println(LocalDateTime.now() + "USER FED MONEY" + userFed + userBalance);
+            String feedData = LocalDateTime.now() + " " + userFed + userBalance + "\n"; //getBytes for one string instead of multiple
+                    writer.write(feedData.getBytes());
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
         } catch (IOException e) {
@@ -27,11 +31,12 @@ public class Logger {
     }
 
     public static void logSale(String message) throws FileNotFoundException {
-        String saleData = String.valueOf(Inventory.getPrice());
+        String saleData = (Inventory.getPrice().toString());
         try (
-                PrintWriter writer = new PrintWriter(new FileOutputStream(log), true);
+                FileOutputStream writer = new FileOutputStream(log, true)
         ) {
-            writer.println(LocalDateTime.now() + " " +saleData);
+            String saleInfo = LocalDateTime.now() + " " +saleData + "\n";
+            writer.write(saleInfo.getBytes());
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
         } catch (IOException e) {
@@ -42,9 +47,10 @@ public class Logger {
     public static void changeOutput(String message) throws FileNotFoundException {
         String changeGiven = Money.printBalance();
         try (
-                PrintWriter writer = new PrintWriter(new FileOutputStream(log), true);
+                FileOutputStream writer = new FileOutputStream(log, true)
         ) {
-            writer.println(LocalDateTime.now() + " " +changeGiven);
+            String changeData = LocalDateTime.now() + " " +changeGiven + "\n";
+            writer.write(changeData.getBytes());
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
         } catch (IOException e) {
