@@ -12,13 +12,12 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class SalesReport {
-    BigDecimal totalCost;
+    private BigDecimal totalCost;
     // map and other variables
-    Map<String, Integer>  inventorySales = new HashMap<>();
-    //private BigDecimal totalCost = new BigDecimal(0.00);
-    // reference to cvs file
-    File vendingInventory = new File("vendingmachine.csv");
-//can we create relative path here?
+    private Map<String, Integer>  inventorySales = new HashMap<>();
+
+    private File vendingInventory = new File("vendingmachine.csv");
+
 
     //method that reads vendingmechine.cvs and populates the inventory sales map and total cost
     public void populateSales(){
@@ -101,5 +100,38 @@ public class SalesReport {
 
     }
 
+    //getter and setter for test case
 
+
+    public BigDecimal getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(BigDecimal totalCost) {
+        this.totalCost = totalCost;
+    }
+
+    public Map<String, Integer> getInventorySales() {
+        return inventorySales;
+    }
+
+    public void setInventorySales(Map<String, Integer> inventorySales) {
+        this.inventorySales = inventorySales;
+    }
+
+    public File getVendingInventory() {
+        return vendingInventory;
+    }
+
+    public void setVendingInventory(File vendingInventory) {
+        this.vendingInventory = vendingInventory;
+    }
+
+    public File getLogger() {
+        return logger;
+    }
+
+    public void setLogger(File logger) {
+        this.logger = logger;
+    }
 }
