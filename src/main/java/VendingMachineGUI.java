@@ -157,7 +157,7 @@ public class VendingMachineGUI {
                             appOutput.append(item.getPurchaseMessage(item) + "\n");
                             //log sale
                             try {
-                                Logger.logSale(item.getPrice());
+                                Logger.logSale(item.getVendPosition(), item.getProductName(), item.getPrice());
                             } catch (FileNotFoundException e) {
                                 throw new RuntimeException(e);
                             }
