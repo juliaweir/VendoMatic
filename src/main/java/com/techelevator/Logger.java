@@ -24,7 +24,7 @@ public class Logger {
         try (
                 FileOutputStream writer = new FileOutputStream(log, true)
         ) {
-            String feedData = date_Time() + " Feed Money" + " $" + userFed + " $" + userBalance + "\n"; //getBytes for one string instead of multiple
+            String feedData = date_Time() + " FEED MONEY:" + " $" + userFed + " $" + userBalance + "\n"; //getBytes for one string instead of multiple
             writer.write(feedData.getBytes());
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
@@ -33,8 +33,9 @@ public class Logger {
         }
     }
 
-    public static void logSale(BigDecimal price) throws FileNotFoundException {
-        String saleData = " $" + price.toString() + " " + UserBalance.printBalance();
+    public static void logSale(String getProductName, String getVendPosition, BigDecimal price) throws FileNotFoundException {
+
+        String saleData = getProductName + " " + getVendPosition + " $" + price.toString() + " " + UserBalance.printBalance();
         try (
                 FileOutputStream writer = new FileOutputStream(log, true)
         ) {
@@ -53,7 +54,7 @@ public class Logger {
         try (
                 FileOutputStream writer = new FileOutputStream(log, true)
         ) {
-            String changeData = date_Time() + " GIVE CHANGE" + " $" +changeGiven + " $" + balance + "\n";
+            String changeData = date_Time() + " GIVE CHANGE:" + " $" +changeGiven + " $" + balance + "\n";
             writer.write(changeData.getBytes());
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
