@@ -92,7 +92,7 @@ public class SalesReport {
                 newSalesReport.println(keyValue.getKey() +  "|" + keyValue.getValue());
             }
             newSalesReport.println("");
-            newSalesReport.println("total = " + totals);
+            newSalesReport.println("total = $" + totals.setScale(2));
 
         }
         catch(FileNotFoundException e){

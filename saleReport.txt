@@ -2,7 +2,6 @@ Stackers|0
 Cowtales|0
 Cola|0
 Heavy|0
-Retire-Mint|0
 Liquid Pain|0
 Arrow to the knee Crisps|0
 Dr. Salt|0
@@ -12,15 +11,14 @@ Wonka Bar|0
 Crunchie|0
 Almond Water|0
 Moonpie|0
-Potato Crisps|0
+Potato Crisps|1
 Green Herb|0
 Triplemint|0
 Mountain Melter|0
 U-Chews|0
 Bidoof Bar|0
-GumshoosRetire-Mint|0
 Impasta Bar|0
 Grain Waves|0
 Chiclets|0
 
-total = null
+total = 3.05
