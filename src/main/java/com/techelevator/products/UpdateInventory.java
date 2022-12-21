@@ -25,9 +25,9 @@ public class UpdateInventory {
 
                 String line = inventoryList.nextLine(); // Read line and store in new String variable
                 wordBy = line.split("\\|"); //Take string and split the words into an array using the pipe symbol
-
+                BigDecimal price = new BigDecimal(wordBy[2]);
               forSale.add(new Inventory(wordBy[0],wordBy[1],
-                       new BigDecimal(wordBy[2]),wordBy[3])); // Add the words in the array to a list.
+                      price ,wordBy[3])); // Add the words in the array to a list.
             }
             return forSale;
         }   catch (Exception e){
