@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import com.techelevator.currency.UserBalance;
+import com.techelevator.products.Inventory;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -37,8 +38,8 @@ public class Logger {
         try (
                 FileOutputStream writer = new FileOutputStream(log, true)
         ) {
-            //add in item name, slot location into string after date_time
-            String saleInfo = date_Time() + saleData + "\n";
+            //add in item name, slot location into string after date_time, maybe getProductName? maybe a map?
+            String saleInfo = date_Time() + " " + saleData + "\n";
             writer.write(saleInfo.getBytes());
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
