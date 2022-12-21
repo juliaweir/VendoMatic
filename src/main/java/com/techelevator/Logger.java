@@ -1,19 +1,15 @@
 package com.techelevator;
 
-import com.techelevator.currency.Money;
 import com.techelevator.currency.UserBalance;
-import com.techelevator.products.Inventory;
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 
 public class Logger {
-    public static String getDate_Time() {
+    public static String date_Time() {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
         String s_Date = formatter.format(date);
@@ -27,7 +23,7 @@ public class Logger {
         try (
                 FileOutputStream writer = new FileOutputStream(log, true)
         ) {
-            String feedData = getDate_Time() + " $" + userFed + " $" + userBalance + "\n"; //getBytes for one string instead of multiple
+            String feedData = date_Time() + " Feed Money" + " $" + userFed + " $" + userBalance + "\n"; //getBytes for one string instead of multiple
             writer.write(feedData.getBytes());
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
@@ -41,7 +37,8 @@ public class Logger {
         try (
                 FileOutputStream writer = new FileOutputStream(log, true)
         ) {
-            String saleInfo = getDate_Time() +saleData + "\n";
+            //add in item name, slot location into string after date_time
+            String saleInfo = date_Time() + saleData + "\n";
             writer.write(saleInfo.getBytes());
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
@@ -55,7 +52,7 @@ public class Logger {
         try (
                 FileOutputStream writer = new FileOutputStream(log, true)
         ) {
-            String changeData = getDate_Time() + " $" +changeGiven + " $" + balance + "\n";
+            String changeData = date_Time() + " GIVE CHANGE" + " $" +changeGiven + " $" + balance + "\n";
             writer.write(changeData.getBytes());
         } catch (FileNotFoundException e) {
             System.out.println("Log file not found");
