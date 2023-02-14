@@ -32,14 +32,12 @@ public class Logger {
             throw new RuntimeException(e);
         }
     }
-
     public static void logSale(String getProductName, String getVendPosition, BigDecimal price) throws FileNotFoundException {
 
         String saleData = getProductName + " " + getVendPosition + " $" + price.toString() + " " + UserBalance.printBalance();
         try (
                 FileOutputStream writer = new FileOutputStream(log, true)
         ) {
-            //add in item name, slot location into string after date_time, maybe getProductName? maybe a map?
             String saleInfo = date_Time() + " " + saleData + "\n";
             writer.write(saleInfo.getBytes());
         } catch (FileNotFoundException e) {
@@ -48,7 +46,6 @@ public class Logger {
             throw new RuntimeException(e);
         }
     }
-
     public static void changeOutput(String message, String balance) throws FileNotFoundException {
         String changeGiven = message;
         try (

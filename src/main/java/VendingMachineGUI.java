@@ -1,20 +1,17 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.io.FileNotFoundException;
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-
 import com.techelevator.Logger;
 import com.techelevator.currency.SalesReport;
 import com.techelevator.currency.UserBalance;
-import com.techelevator.products.DisplayMessages;
 import com.techelevator.products.Inventory;
 import com.techelevator.products.UpdateInventory;
-import com.techelevator.products.*;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 public class VendingMachineGUI {
     public static void main(String[] args) {
